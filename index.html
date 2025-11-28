@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Алексей Жадан - Веб-разработчик</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0a0a1a;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Секция 1 - Герой */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .animated-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://99px.ru/sstorage/86/2018/07/image_860607180711233513355.gif') center/cover no-repeat;
+            opacity: 0.7;
+            z-index: 1;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(10, 10, 26, 0.9) 0%, rgba(25, 25, 112, 0.8) 100%);
+            z-index: 2;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+            z-index: 3;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            z-index: 3;
+        }
+
+        .hero-image img {
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: transform 0.5s ease;
+        }
+
+        .hero-image img:hover {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            background: linear-gradient(90deg, #ff6b6b, #6a11cb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            color: #e0e0e0;
+        }
+
+        .description {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+            color: #b0b0b0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 35px;
+            background: linear-gradient(90deg, #ff6b6b, #6a11cb);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.4);
+            margin-right: 15px;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .cta-button:hover:before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(106, 17, 203, 0.6);
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            z-index: 3;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-5px) translateX(-50%);
+            }
+        }
+
+        .social-links {
+            margin-top: 2rem;
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .decoration {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            z-index: 2;
+        }
+
+        .decoration-1 {
+            width: 300px;
+            height: 300px;
+            top: -150px;
+            right: -150px;
+        }
+
+        .decoration-2 {
+            width: 200px;
+            height: 200px;
+            bottom: -100px;
+            left: -100px;
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 2;
+        }
+
+        .floating-element {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+            width: 20px;
+            height: 20px;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 60%;
+            left: 80%;
+            animation-delay: 2s;
+            width: 30px;
+            height: 30px;
+        }
+
+        .floating-element:nth-child(3) {
+            top: 80%;
+            left: 20%;
+            animation-delay: 4s;
+            width: 25px;
+            height: 25px;
+        }
+
+        .floating-element:nth-child(4) {
+            top: 40%;
+            left: 70%;
+            animation-delay: 6s;
+            width: 35px;
+            height: 35px;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Секция 2 - Достижения */
+        .achievements-section {
+            min-height: 100vh;
+            padding: 100px 5%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .section-title h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #6a11cb, #2575fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-title p {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .achievements-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .achievement-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            flex: 1;
+            min-width: 300px;
+            max-width: 350px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .achievement-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+        }
+
+        .achievement-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .achievement-card p {
+            color: #b0b0b0;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .achievement-link {
+            display: inline-block;
+            color: #6a11cb;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .achievement-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: #6a11cb;
+            transition: width 0.3s ease;
+        }
+
+        .achievement-link:hover {
+            color: #8a2be2;
+        }
+
+        .achievement-link:hover:after {
+            width: 100%;
+        }
+
+        /* Секция 3 - Технологии */
+        .technologies-section {
+            min-height: 100vh;
+            padding: 100px 5%;
+            background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .technologies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .technology-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .technology-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .technology-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #ff6b6b, #6a11cb);
+        }
+
+        .technology-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .technology-card p {
+            color: #b0b0b0;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .skill-level {
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .skill-level span {
+            font-size: 0.9rem;
+            color: #b0b0b0;
+            margin-right: 10px;
+        }
+
+        .skill-bar {
+            flex-grow: 1;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #6a11cb, #2575fc);
+            border-radius: 3px;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 992px) {
+            .hero-section {
+                flex-direction: column;
+                text-align: center;
+                padding: 80px 5%;
+            }
+
+            .hero-content {
+                margin-bottom: 50px;
+            }
+
+            .hero-image img {
+                width: 280px;
+                height: 280px;
+            }
+
+            h1 {
+                font-size: 2.8rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .achievements-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .achievement-card {
+                max-width: 100%;
+            }
+
+            .technologies-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .technologies-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+
+            .hero-image img {
+                width: 220px;
+                height: 220px;
+            }
+
+            .cta-button {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+
+            .technology-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Секция 1 - Герой -->
+    <section class="hero-section">
+        <div class="animated-bg"></div>
+        <div class="overlay"></div>
+        
+        <div class="floating-elements">
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+        </div>
+        
+        <div class="decoration decoration-1"></div>
+        <div class="decoration decoration-2"></div>
+        
+        <div class="hero-content">
+            <h1>Привет! Я Алексей Жадан — веб-разработчик</h1>
+            <h2>Создаю современные веб-приложения</h2>
+            <p class="description">
+                Специализируюсь на разработке адаптивных веб-сайтов и веб-приложений с использованием современных технологий. Более 5 лет опыта в создании цифровых решений для бизнеса.
+            </p>
+            <a href="#technologies" class="cta-button">Мои технологии</a>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        
+        <div class="hero-image">
+            <img src="https://i.pinimg.com/736x/08/93/69/089369bed7a1fcd2950f6d081111d62c.jpg" alt="Алексей Жадан - Веб-разработчик">
+        </div>
+        
+        <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Секция 2 - Достижения -->
+    <section class="achievements-section" id="achievements">
+        <div class="section-container">
+            <div class="section-title">
+                <h2>Мои достижения</h2>
+                <p>Результаты моей работы за последние годы, которые подтверждают профессионализм и эффективность</p>
+            </div>
+            
+            <div class="achievements-grid">
+                <div class="achievement-card">
+                    <div class="achievement-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Увеличение клиентской базы</h3>
+                    <p>За последний год количество клиентов выросло на 40%, что подтверждает высокий уровень доверия к нашим услугам.</p>
+                    <a href="#" class="achievement-link">Подробнее</a>
+                </div>
+                
+                <div class="achievement-card">
+                    <div class="achievement-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Рост доходов</h3>
+                    <p>Благодаря внедрению новых стратегий, доходы компании увеличились на 65% за последние два года.</p>
+                    <a href="#" class="achievement-link">Подробнее</a>
+                </div>
+                
+                <div class="achievement-card">
+                    <div class="achievement-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Международное признание</h3>
+                    <p>Наши проекты получили международные награды и были отмечены в ведущих отраслевых изданиях.</p>
+                    <a href="#" class="achievement-link">Подробнее</a>
+                </div>
+                
+                <div class="achievement-card">
+                    <div class="achievement-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>Профессиональные награды</h3>
+                    <p>Получено 12 профессиональных наград за инновационные решения и высокое качество выполнения проектов.</p>
+                    <a href="#" class="achievement-link">Подробнее</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция 3 - Технологии -->
+    <section class="technologies-section" id="technologies">
+        <div class="section-container">
+            <div class="section-title">
+                <h2>Мои технологии</h2>
+                <p>Современные инструменты и технологии, которые я использую для создания качественных веб-приложений</p>
+            </div>
+            
+            <div class="technologies-grid">
+                <div class="technology-card">
+                    <div class="technology-icon">
+                        <i class="fab fa-html5"></i>
+                    </div>
+                    <h3>HTML5 & CSS3</h3>
+                    <p>Создание семантической, доступной и адаптивной верстки с использованием современных возможностей HTML5 и CSS3, включая Flexbox, Grid и CSS-анимации.</p>
+                    <div class="skill-level">
+                        <span>Уровень:</span>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 95%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="technology-card">
+                    <div class="technology-icon">
+                        <i class="fab fa-js"></i>
+                    </div>
+                    <h3>JavaScript & TypeScript</h3>
+                    <p>Разработка интерактивных веб-приложений с использованием современных возможностей ES6+, а также TypeScript для повышения надежности кода.</p>
+                    <div class="skill-level">
+                        <span>Уровень:</span>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="technology-card">
+                    <div class="technology-icon">
+                        <i class="fab fa-react"></i>
+                    </div>
+                    <h3>React & Next.js</h3>
+                    <p>Создание современных SPA и SSR приложений с использованием React, Next.js, Redux и других библиотек экосистемы React.</p>
+                    <div class="skill-level">
+                        <span>Уровень:</span>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 88%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="technology-card">
+                    <div class="technology-icon">
+                        <i class="fab fa-node-js"></i>
+                    </div>
+                    <h3>Node.js & Express</h3>
+                    <p>Разработка серверной части приложений с использованием Node.js, Express, создание REST API и работа с базами данных.</p>
+                    <div class="skill-level">
+                        <span>Уровень:</span>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="technology-card">
+                    <div class="technology-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Базы данных</h3>
+                    <p>Работа с реляционными (PostgreSQL, MySQL) и нереляционными (MongoDB) базами данных, проектирование схем и оптимизация запросов.</p>
+                    <div class="skill-level">
+                        <span>Уровень:</span>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="technology-card">
+                    <div class="technology-icon">
+                        <i class="fab fa-git-alt"></i>
+                    </div>
+                    <h3>Git & DevOps</h3>
+                    <p>Владение системой контроля версий Git, опыт работы с CI/CD, Docker и основами облачных платформ (AWS, Vercel, Netlify).</p>
+                    <div class="skill-level">
+                        <span>Уровень:</span>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 82%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.querySelector('.scroll-down').addEventListener('click', function() {
+            document.getElementById('achievements').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
